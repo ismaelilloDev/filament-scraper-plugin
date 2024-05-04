@@ -5,7 +5,6 @@ namespace IsmaelilloDev\FilamentScraperPlugin\Actions;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 use IsmaelilloDev\FilamentScraperPlugin\Contracts\IsScrapable;
 use Lorisleiva\Actions\Concerns\AsAction;
 
