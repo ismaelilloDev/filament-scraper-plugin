@@ -20,6 +20,7 @@ class GenerateDynamicFormForTheSelectors
         foreach ($db_models as $key => $model) {
             $columns = GetModelColumns::run(new $key);
             $repeater_schema[] = TextInput::make('model_selector')->required();
+            $repeater_schema[] = TextInput::make('detail_link_selector')->helperText('Selector of the link to scrape de detail');
             foreach ($columns as $column) {
                 $repeater_schema[] = TextInput::make(''.$column)->required();
             }

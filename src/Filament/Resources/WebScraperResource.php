@@ -3,6 +3,7 @@
 namespace IsmaelilloDev\FilamentScraperPlugin\Filament\Resources;
 
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -35,6 +36,9 @@ class WebScraperResource extends Resource
                             ->required(),
                         Forms\Components\TextInput::make('link')
                             ->required(),
+                        Toggle::make('get_detail')
+                            ->live()
+                            ->reactive(),
                         Forms\Components\Select::make('model')
                             ->options(GetAllDataBaseModels::run())
                             ->live()
