@@ -3,7 +3,6 @@
 namespace IsmaelilloDev\FilamentScraperPlugin\Actions;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
 use IsmaelilloDev\FilamentScraperPlugin\Contracts\IsScrapable;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,7 +12,7 @@ class GetModelColumns
 
     public function handle(Model $model): array
     {
-        if(!$model instanceof IsScrapable) {
+        if (! $model instanceof IsScrapable) {
             return [];
         }
 

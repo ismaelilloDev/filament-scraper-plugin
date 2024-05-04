@@ -18,10 +18,10 @@ class GenerateDynamicFormForTheSelectors
         $schema = [];
         $db_models = GetAllDataBaseModels::run();
         foreach ($db_models as $key => $model) {
-            $columns  = GetModelColumns::run(new $key);
+            $columns = GetModelColumns::run(new $key);
             $repeater_schema[] = TextInput::make('model_selector')->required();
             foreach ($columns as $column) {
-                $repeater_schema[] = TextInput::make(''. $column)->required();
+                $repeater_schema[] = TextInput::make(''.$column)->required();
             }
             $schema[] = Repeater::make('selectors')
                 ->schema($repeater_schema)
@@ -29,6 +29,7 @@ class GenerateDynamicFormForTheSelectors
                 ->maxItems(1)
                 ->visible(fn (Get $get) => $get('model') === $key);
         }
+
         return $schema;
     }
 }

@@ -21,21 +21,24 @@ class GetAllDataBaseModels
             ->map(function ($item) {
                 $path = $item->getRelativePathName();
                 $class = sprintf('\%s%s', Container::getInstance()->getNamespace(), strtr(substr($path, 0, strrpos($path, '.')), '/', '\\'));
+
                 return $class;
-            })->filter(function($class){
+            })->filter(function ($class) {
                 $reflection = new \ReflectionClass($class);
-                return $reflection->isSubclassOf(Model::class) && !$reflection->isAbstract() && $reflection->implementsInterface(IsScrapable::class);
+
+                return $reflection->isSubclassOf(Model::class) && ! $reflection->isAbstract() && $reflection->implementsInterface(IsScrapable::class);
             });
 
         $formattedModels = $models->mapWithKeys(function ($model, $key) {
             return [$model => class_basename($model)];
         });
+
         return $formattedModels;
     }
 
     private function formatNameSpace($relativePath)
     {
         // @phpstan-ignore-next-line
-        return Str::beforeLast(Container::getInstance()->getNamespace(). $relativePath,'.php');
+        return Str::beforeLast(Container::getInstance()->getNamespace().$relativePath, '.php');
     }
 }

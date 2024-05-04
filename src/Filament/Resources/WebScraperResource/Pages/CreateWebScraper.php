@@ -2,7 +2,6 @@
 
 namespace IsmaelilloDev\FilamentScraperPlugin\Filament\Resources\WebScraperResource\Pages;
 
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use IsmaelilloDev\FilamentScraperPlugin\Filament\Resources\WebScraperResource;
 

@@ -12,6 +12,6 @@ class WebScraper extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'selectors' => 'array'
+        'selectors' => 'array',
     ];
 }

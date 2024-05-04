@@ -3,12 +3,8 @@
 namespace IsmaelilloDev\FilamentScraperPlugin\Spiders;
 
 use Generator;
-use RoachPHP\Downloader\Middleware\RequestDeduplicationMiddleware;
-use RoachPHP\Extensions\LoggerExtension;
-use RoachPHP\Extensions\StatsCollectorExtension;
 use RoachPHP\Http\Response;
 use RoachPHP\Spider\BasicSpider;
-use RoachPHP\Spider\ParseResult;
 use Symfony\Component\DomCrawler\Crawler;
 
 class WebSpider extends BasicSpider
@@ -18,7 +14,7 @@ class WebSpider extends BasicSpider
     public function parse(Response $response): Generator
     {
         $web = $this->context['web'];
-        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null );
+        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null);
         $models = $response->filter($selectors['model_selector']);
         unset($selectors['model_selector']);
         $insertData = [];
@@ -32,7 +28,7 @@ class WebSpider extends BasicSpider
         }
         $web->model::upsert($insertData, ['title'], ['description']);
         yield $this->item([
-            'title' => $insertData
+            'title' => $insertData,
         ]);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace IsmaelilloDev\FilamentScraperPlugin\Filament\Resources;
 
-
-
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -28,6 +26,7 @@ class WebScraperResource extends Resource
     public static function form(Form $form): Form
     {
         $schema = GenerateDynamicFormForTheSelectors::run();
+
         return $form
             ->schema([
                 Forms\Components\Section::make()
@@ -40,9 +39,9 @@ class WebScraperResource extends Resource
                             ->options(GetAllDataBaseModels::run())
                             ->live()
                             ->reactive()
-                            ->required()
+                            ->required(),
                     ]),
-                ...$schema
+                ...$schema,
             ]);
     }
 
@@ -51,7 +50,7 @@ class WebScraperResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('model')
+                Tables\Columns\TextColumn::make('model'),
             ])
             ->filters([
                 //
@@ -63,7 +62,7 @@ class WebScraperResource extends Resource
                         RunScraper::run($record);
                         Notification::make()->title('Data imported successfully')->success()->send();
                     })
-                    ->icon('heroicon-o-arrow-down-circle')
+                    ->icon('heroicon-o-arrow-down-circle'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

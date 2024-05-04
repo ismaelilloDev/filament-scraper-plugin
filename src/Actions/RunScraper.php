@@ -2,7 +2,6 @@
 
 namespace IsmaelilloDev\FilamentScraperPlugin\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use IsmaelilloDev\FilamentScraperPlugin\Models\WebScraper;
 use IsmaelilloDev\FilamentScraperPlugin\Spiders\WebSpider;
 use Lorisleiva\Actions\Concerns\AsAction;
