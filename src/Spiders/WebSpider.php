@@ -26,9 +26,14 @@ class WebSpider extends BasicSpider
             }
             $insertData[] = $data;
         }
-        $web->model::upsert($insertData, ['title'], ['description']);
+        $web->model::upsert($insertData, $web->model::uniqueScrapableFields(), $this->getNonUniqueFields($web->model::uniqueScrapableFields(), $web->model::scrapableFields()));
         yield $this->item([
             'title' => $insertData,
         ]);
+    }
+
+    private function getNonUniqueFields(array $uniqueFields, array $fields)
+    {
+        return array_values(array_diff($fields, $uniqueFields));
     }
 }
