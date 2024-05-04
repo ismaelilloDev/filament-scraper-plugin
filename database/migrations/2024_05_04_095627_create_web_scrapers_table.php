@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('web_scrapers', function (Blueprint $table) {
             $table->id();
+            $table->boolean('get_detail')->default(false);
             $table->string('name');
             $table->string('model');
             $table->string('link');
