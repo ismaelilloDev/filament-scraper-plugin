@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace IsmaelilloDev\FilamentScraperPlugin\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentScraperPluginCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-scraper-plugin';
 
     public $description = 'My command';
 
