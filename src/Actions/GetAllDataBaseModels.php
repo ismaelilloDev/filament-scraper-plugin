@@ -20,6 +20,7 @@ class GetAllDataBaseModels
         $models = collect(File::allFiles(app_path()))
             ->map(function ($item) {
                 $path = $item->getRelativePathName();
+                /** @phpstan-ignore-next-line */
                 $class = sprintf('\%s%s', Container::getInstance()->getNamespace(), strtr(substr($path, 0, strrpos($path, '.')), '/', '\\'));
 
                 return $class;
@@ -34,11 +35,5 @@ class GetAllDataBaseModels
         });
 
         return $formattedModels;
-    }
-
-    private function formatNameSpace($relativePath)
-    {
-        // @phpstan-ignore-next-line
-        return Str::beforeLast(Container::getInstance()->getNamespace().$relativePath, '.php');
     }
 }

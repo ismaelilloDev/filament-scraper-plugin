@@ -19,6 +19,7 @@ class RunScraper
         Roach::startSpider(
             WebSpider::class,
             new Overrides(
+                /** @phpstan-ignore-next-line */
                 startUrls: [$web->link]
             ),
             context: ['web' => $web],
