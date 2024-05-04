@@ -15,10 +15,10 @@ class WebSpider extends BasicSpider
     public function parse(Response $response): Generator
     {
         $web = $this->context['web'];
-        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null );
+        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null);
         $models = $response->filter($selectors['model_selector']);
 
-        if($web->get_detail && isset($selectors['detail_link_selector'])) {
+        if ($web->get_detail && isset($selectors['detail_link_selector'])) {
 
             $links = $response->filter($selectors['detail_link_selector'])->links();
             foreach ($links as $link) {
@@ -32,14 +32,14 @@ class WebSpider extends BasicSpider
         $insertData = $this->handleScrape($web, $models, $selectors);
 
         yield $this->item([
-            'data' => $insertData
+            'data' => $insertData,
         ]);
     }
 
     public function parseDetail(Response $response): Generator
     {
         $web = $this->context['web'];
-        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null );
+        $selectors = collect($web->selectors[0])->filter(fn ($selector) => $selector !== null);
         unset($selectors['model_selector']);
         unset($selectors['detail_link_selector']);
 
@@ -49,7 +49,7 @@ class WebSpider extends BasicSpider
         }
         $web->model::upsert([$data], $web->model::uniqueScrapableFields(), $this->getNonUniqueFields($web->model::uniqueScrapableFields(), $web->model::scrapableFields()));
         yield $this->item([
-            'data' => $data
+            'data' => $data,
         ]);
     }
 
@@ -65,6 +65,7 @@ class WebSpider extends BasicSpider
             $insertData[] = $data;
         }
         $web->model::upsert($insertData, $web->model::uniqueScrapableFields(), $this->getNonUniqueFields($web->model::uniqueScrapableFields(), $web->model::scrapableFields()));
+
         return $insertData;
     }
 
