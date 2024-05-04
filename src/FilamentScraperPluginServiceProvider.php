@@ -2,9 +2,9 @@
 
 namespace IsmaelilloDev\FilamentScraperPlugin;
 
+use IsmaelilloDev\FilamentScraperPlugin\Commands\FilamentScraperPluginCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use IsmaelilloDev\FilamentScraperPlugin\Commands\FilamentScraperPluginCommand;
 
 class FilamentScraperPluginServiceProvider extends PackageServiceProvider
 {
@@ -20,6 +20,6 @@ class FilamentScraperPluginServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('2024_05_04_095627_create_web_scrapers_table');
-            // ->hasCommand(FilamentScraperPluginCommand::class);
+        // ->hasCommand(FilamentScraperPluginCommand::class);
     }
 }

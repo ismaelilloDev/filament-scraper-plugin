@@ -3,8 +3,8 @@
 namespace IsmaelilloDev\FilamentScraperPlugin\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use IsmaelilloDev\FilamentScraperPlugin\FilamentScraperPluginServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
