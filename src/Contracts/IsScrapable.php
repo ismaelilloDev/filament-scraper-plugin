@@ -7,4 +7,6 @@ interface IsScrapable
     public static function scrapableFields(): array;
 
     public static function uniqueScrapableFields(): array;
+
+    public static function originUrlField(): ?string;
 }

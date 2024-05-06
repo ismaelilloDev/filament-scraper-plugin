@@ -47,6 +47,11 @@ class WebSpider extends BasicSpider
         foreach ($selectors as $key => $selector) {
             $data[$key] = trim($response->filter($selector)->getNode(0)?->textContent).'';
         }
+
+        $originUrlField = $web->model::originUrlField();
+        if($originUrlField) {
+            $data[$originUrlField] = $response->getRequest()->getUri();
+        }
         $web->model::upsert([$data], $web->model::uniqueScrapableFields(), $this->getNonUniqueFields($web->model::uniqueScrapableFields(), $web->model::scrapableFields()));
         yield $this->item([
             'data' => $data,
@@ -56,11 +61,16 @@ class WebSpider extends BasicSpider
     private function handleScrape(WebScraper $web, $models, $selectors)
     {
         $insertData = [];
+        $originUrlField = $web->model::originUrlField();
+
         foreach ($models as $model) {
             $crawler = new Crawler($model, $web->link);
             $data = [];
             foreach ($selectors as $key => $selector) {
                 $data[$key] = trim($crawler->filter($selector)->getNode(0)?->textContent);
+                if($originUrlField) {
+                    $data[$originUrlField] = $web->link;
+                }
             }
             $insertData[] = $data;
         }
