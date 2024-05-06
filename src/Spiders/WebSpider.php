@@ -49,7 +49,7 @@ class WebSpider extends BasicSpider
         }
 
         $originUrlField = $web->model::originUrlField();
-        if($originUrlField) {
+        if ($originUrlField) {
             $data[$originUrlField] = $response->getRequest()->getUri();
         }
         $web->model::upsert([$data], $web->model::uniqueScrapableFields(), $this->getNonUniqueFields($web->model::uniqueScrapableFields(), $web->model::scrapableFields()));
@@ -68,7 +68,7 @@ class WebSpider extends BasicSpider
             $data = [];
             foreach ($selectors as $key => $selector) {
                 $data[$key] = trim($crawler->filter($selector)->getNode(0)?->textContent);
-                if($originUrlField) {
+                if ($originUrlField) {
                     $data[$originUrlField] = $web->link;
                 }
             }
