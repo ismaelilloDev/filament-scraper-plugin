@@ -2,6 +2,7 @@
 
 namespace IsmaelilloDev\FilamentScraperPlugin\Actions;
 
+use Exception;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
@@ -24,9 +25,12 @@ class GetAllDataBaseModels
 
                 return $class;
             })->filter(function ($class) {
-                $reflection = new \ReflectionClass($class);
-
-                return $reflection->isSubclassOf(Model::class) && ! $reflection->isAbstract() && $reflection->implementsInterface(IsScrapable::class);
+                try {
+                    $reflection = new \ReflectionClass($class);
+                    return $reflection->isSubclassOf(Model::class) && ! $reflection->isAbstract() && $reflection->implementsInterface(IsScrapable::class);
+                } catch(Exception $e) {
+                    return false;
+                }
             });
 
         $formattedModels = $models->mapWithKeys(function ($model, $key) {
