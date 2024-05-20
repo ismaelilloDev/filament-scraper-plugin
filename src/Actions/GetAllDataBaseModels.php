@@ -27,8 +27,9 @@ class GetAllDataBaseModels
             })->filter(function ($class) {
                 try {
                     $reflection = new \ReflectionClass($class);
+
                     return $reflection->isSubclassOf(Model::class) && ! $reflection->isAbstract() && $reflection->implementsInterface(IsScrapable::class);
-                } catch(Exception $e) {
+                } catch (Exception $e) {
                     return false;
                 }
             });
